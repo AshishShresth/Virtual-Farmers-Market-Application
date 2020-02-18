@@ -22,11 +22,20 @@ class CategoryController extends Controller
 
     //GET specific one with $id
     public function show($id){
-        // TODO:
+        return view('categories.category')->with([
+            'category' => Category::find( $id )
+        ]);
     }
 
     //POST
     public function store(Request $request){
-        // TODO:
+        $request->validate([
+           'category_title' => 'required'
+        ]);
+
+        $category = new Category();
+        $category->title = $request->get('category_title');
+        $category->save();
+        return redirect()->back()->with('message', 'New Category Created');
     }
 }

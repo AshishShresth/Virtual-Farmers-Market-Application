@@ -35,4 +35,8 @@ class Post extends Model
     public function reports(){
         return $this->hasMany(Report::class);
     }
+
+    public function link(){
+        return '/posts/' . $this->id;
+    }
 }

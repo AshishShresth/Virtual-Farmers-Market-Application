@@ -13,11 +13,27 @@
 
 use App\User;
 
-Route::get('test', 'CategoryController@index');
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('categories' , 'CategoryController@index')->name('categories');
+    Route::post('categories' , 'CategoryController@store')->name('save-category');
+    Route::get( 'categories/{id}' , 'CategoryController@show');
+
+    Route::get('comments' , 'CommentController@index')->name('comments');
+    Route::get('comments/{id}' , 'CommentController@show');
+
+    Route::get('user' , 'UserController@index')->name('users');
+
+    Route::get('posts' , 'PostController@index')->name('posts');
+    Route::get('posts/{id}' , 'PostController@show')->name('show-post');
+
+} );
 
 Auth::routes(['verify' => true]);
 
