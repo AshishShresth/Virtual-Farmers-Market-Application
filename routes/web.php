@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('posts' , 'PostController@index')->name('posts');
     Route::get('posts/{id}' , 'PostController@show')->name('show-post');
+    Route::get('new-post' , 'PostController@newPost')->name('add-post');
+    Route::post('new-post' , 'PostController@store')->name('save-post');
 
 } );
 

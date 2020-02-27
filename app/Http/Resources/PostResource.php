@@ -18,6 +18,7 @@ class PostResource extends JsonResource
             'post_id' => $this->id,
             'product_name' => $this->product_name,
             'product_quantity' => $this->quantity,
+            'price' => $this->price_per_kg,
             'date_of_product_harvest' => $this->date_of_harvest,
             'location' => $this->current_address,
             'district' => $this->district,
@@ -26,6 +27,13 @@ class PostResource extends JsonResource
             'category_id' => $this->category_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
+            'user' => new UserResource( $this->user ),
+            'category' => new CategoryResource( $this->category ),
+            'images' => ImageResource::collection( $this->images ),
+            'comments' => CommentResource::collection( $this->comments ),
+            'bids' => BidResource::collection( $this->bids),
+
 
         ];
     }

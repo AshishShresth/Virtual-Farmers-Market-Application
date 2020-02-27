@@ -4,29 +4,26 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\shared\CategoriesMasterController;
+//use App\Http\Controllers\shared\CategoriesMasterController;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostsResource;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoriesResource;
 
 class CategoryApiController extends Controller
 {
-    public $masterController;
-
-    public function __construct()
-    {
-        $this->masterController = new CategoriesMasterController();
-    }
-
-    //GET ALL
     public function index(){
-        // TODO:
-        return new CategoriesResource($this->masterController->index());
-
+        $categories = Category::all();
+        return CategoryResource::collection( $categories );
+        //return new CategoriesResource( $categories );
     }
 
-    //GET $id
-    public function show($id){
-        // TODO:
+    public function posts( $id){
+        $posts = Category::find($id)->posts()->paginate();
+        return PostResource::collection($posts);
+        //$category = Category::find($id);
+        //$posts = $category->posts; // we have defined the post relation in the category model
+        //return new PostsResource( $posts );
     }
-
 }

@@ -1,9 +1,6 @@
 @extends ( 'layouts.app' )
 
 @section( 'content' )
-
-
-
             <div class="col-md-8 mt-2 mb-2">
                 <div class="card">
                     <div class="card-body">
@@ -14,7 +11,7 @@
                         <p>District: {{ $post->district }}</p>
                         <p>Product description: {{ $post->product_dexcription }}</p>
                         <p>User: {{$post->user->first_name}} {{$post->user->last_name}}</p>
-                        <p>Category {{$post->category->title}}</p>
+                        <p>Category: {{$post->category->title}}</p>
                         <p>This post was created at: {{$post->created_at}}</p>
                     </div>
                 </div>
@@ -22,7 +19,7 @@
             <div class="row mt-4">
                 <div class="col-md-4">
                     @foreach($images as $image)
-                        <img style="width: 100px; height: 100px" src=" {{$image->image_url}} " alt="">
+                        <img src="{{ asset( 'storage/post_images/'.$image->image_url)}}" class="img-thumbnail">
                     @endforeach
                 </div>
     </div>
