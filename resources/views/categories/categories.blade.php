@@ -18,9 +18,6 @@
                 </div>
             </div>
         </form>
-
-
-
     <div class="row">
         @foreach($categories as $category)
             <div class="col-md-3 mt-2 mb-2">

@@ -30,15 +30,11 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('user' , 'UserController@index')->name('users');
 
-    Route::get('posts' , 'PostController@index')->name('posts');
-    Route::get('posts/{id}' , 'PostController@show')->name('show-post');
-    Route::get('new-post' , 'PostController@newPost')->name('add-post');
-    Route::post('new-post' , 'PostController@store')->name('save-post');
-
 } );
+Route::resource('posts', 'PostController');
 
 Auth::routes(['verify' => true]);
-
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 

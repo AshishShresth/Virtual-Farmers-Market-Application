@@ -56,6 +56,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
+                                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+
                                     <a class="dropdown-item" href="{{ route('categories') }}">
                                         {{ __('Categories') }}
                                     </a>
@@ -68,12 +70,8 @@
                                         {{ __('Users') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('posts') }}">
+                                    <a class="dropdown-item" href="{{ route('posts.index') }}">
                                         {{ __('Posts') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('add-post') }}">
-                                        {{ __('Add Posts') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
