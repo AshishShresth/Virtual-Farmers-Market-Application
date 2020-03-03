@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function(){
 } );
 Route::resource('posts', 'PostController');
 
+Route::get('/admin', 'AdminController@index');
+
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
