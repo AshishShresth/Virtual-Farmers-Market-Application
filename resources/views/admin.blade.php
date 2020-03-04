@@ -6,9 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Admin Dashboard</div>
-
                     <div>
-                        Your logged in as admin!
+                        @component('components.who')
+                        @endcomponent
                     </div>
                 </div>
             </div>
