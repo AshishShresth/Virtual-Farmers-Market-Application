@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h3><a href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>
                         <p class="card-title">{{$post->id}} </p>
-
+                        <a href="/posts/{{$post->id}}" class="btn btn-primary">Go To Post</a></h3>
                     </div>
                 </div>
             </div>

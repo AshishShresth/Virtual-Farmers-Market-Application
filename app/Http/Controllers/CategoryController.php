@@ -38,4 +38,17 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->back()->with('message', 'New Category Created');
     }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        //Check if the post exists before deleting
+        if (!isset($category)){
+            //return redirect()->route('posts')->with('error', 'No post found');
+            return redirect('/categories')->with('error', 'No category found');
+        }
+
+        $category->delete();
+        return redirect('/categories')->with('success', 'Post Deleted');
+    }
 }

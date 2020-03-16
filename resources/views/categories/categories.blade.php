@@ -24,6 +24,11 @@
                 <div class="card">
                     <div class="card-body">
                         {{ $category->title }}
+                        <form action="{{ url('/categories', ['id' => $category->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                        </form>
                     </div>
                 </div>
 
