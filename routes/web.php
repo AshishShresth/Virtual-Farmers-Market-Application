@@ -56,6 +56,7 @@ Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+Route::any('search', 'SearchController@search')->name('search');
 
 
 

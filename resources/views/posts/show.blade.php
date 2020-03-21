@@ -9,7 +9,7 @@
                 <p>Price per kilogram: Rs.{{ $post->price_per_kg }}</p>
                 <p>Date of harvest: {{ $post->date_of_harvest }}</p>
                 <p>District: {{ $post->district }}</p>
-                <p>Product description: {{ $post->product_dexcription }}</p>
+                <p>Product description: {{ $post->product_description }}</p>
                 <p>User: {{$post->user->first_name}} {{$post->user->last_name}}</p>
                 <p>Category: {{$post->category->title}}</p>
                 <p>This post was created at: {{$post->created_at}}</p>

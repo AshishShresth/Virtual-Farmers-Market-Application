@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-5">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="storage/post_images/logo/logo.png" alt="VFM Logo" class="brand-image"
+            <img src="{{ asset('storage/post_images/logo/logo.png') }}" alt="VFM Logo" class="brand-image"
                  style="opacity: .8; width: 70px; height: 70px">
             <span class="brand-text font-weight-light">VFM</span>
         </a>
@@ -19,8 +19,9 @@
                 </li>
             </ul>
             <!--Search bar-->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 " type="search" placeholder="Search..." aria-label="Search" style="border-radius: 25px; width:250px !important;">
+            <form method="post" class="form-inline my-2 my-lg-0" action="{{route('search')}}">
+                @csrf
+                <input class="form-control mr-sm-2 " name="search" id="searchPost" type="search" placeholder="Search..." aria-label="Search" style="border-radius: 25px; width:250px !important;">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit" style="border-radius: 25px;"><i class="fa fa-search"></i>Search</button>
             </form>
             <!-- Right Side Of Navbar -->
