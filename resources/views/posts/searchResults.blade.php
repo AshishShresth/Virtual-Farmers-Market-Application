@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-horizontal">
                                 <div class="img-square-wrapper">
-                                    <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap">
+                                    <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text">

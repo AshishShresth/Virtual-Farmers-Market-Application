@@ -9,16 +9,12 @@
             <div class="col-md-6 gedf-main">
                 @foreach( $posts as $post)
                     <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h3><a class="card-link" href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>
-                            </div>
-                        </div>
                         <div class="card-horizontal">
                             <div class="img-square-wrapper">
-                                <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap">
+                                <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
                             </div>
                             <div class="card-body">
+                                <h3><a class="card-link" href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>
                                 <div class="card-text">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
                                     sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.

@@ -8,7 +8,7 @@
             <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product name"/>
         </div>
         <div class="form-group">
-            <label for="quantity">Quantity</label>
+            <label for="quantity">Quantity in Kilogram</label>
             <input type="number" class="form-group" name="quantity" id="quantity" />
         </div>
         <div class="form-group">
@@ -114,15 +114,19 @@
                     Udayapur </option> </select>
 
         </div>
-        <div class="form-group">
-            <label for="post_images">Product images</label>
-            <input id="post_images" name="post_images[]" type="file" multiple>
-        </div>
+        <!--
+            <div class="form-group">
+                <label for="post_images">Product images</label>
+                <input id="post_images" name="post_images[]" type="file" multiple>
+            </div>
+        -->
         <div class="form-group">
             <label for="quantity">Product description</label>
             <textarea class="form-control" name="product_description" cols="20" rows="10" placeholder="Body Text"></textarea>
         </div>
-
+        <div class="form-group">
+            <input type="file" name="cover_image">
+        </div>
         <button type="submit" class="btn btn-outline-secondary">Submit</button>
     </form>
 

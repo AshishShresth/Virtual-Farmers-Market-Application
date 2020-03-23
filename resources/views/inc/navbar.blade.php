@@ -15,7 +15,7 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">News Feed</a>
+                    <a class="nav-link" href="{{route('dailyPrice')}}">Kalimati Price</a>
                 </li>
             </ul>
             <!--Search bar-->

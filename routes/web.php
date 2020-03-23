@@ -55,7 +55,7 @@ Route::prefix('admin')->group(function (){
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
+Route::get('/kalimati-price', 'KalimatiPriceController@index')->name('dailyPrice');
 Route::any('search', 'SearchController@search')->name('search');
 
 
