@@ -14,7 +14,8 @@ class CategoryController extends Controller
         return view('categories.categories')->with(
             [
                 //'categories' => new CategoriesResource( Category::paginate() ),
-                'categories' => Category::all()
+                'categories' => Category::all(),
+                'levels' => Category::where(['parent_id'=>0])->get()
             ]
         );
 
@@ -30,11 +31,13 @@ class CategoryController extends Controller
     //POST
     public function store(Request $request){
         $request->validate([
-           'category_title' => 'required'
+           'category_title' => 'required',
+
         ]);
 
         $category = new Category();
         $category->title = $request->get('category_title');
+        $category->parent_id = $request->get('parent_id');
         $category->save();
         return redirect()->back()->with('message', 'New Category Created');
     }
@@ -50,5 +53,9 @@ class CategoryController extends Controller
 
         $category->delete();
         return redirect('/categories')->with('success', 'Post Deleted');
+    }
+
+    public function subCat(){
+        return Category::with('childs')->where('parent_id');
     }
 }

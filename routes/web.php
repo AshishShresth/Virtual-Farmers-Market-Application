@@ -21,17 +21,28 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function(){
+    //categories
     Route::get('categories' , 'CategoryController@index')->name('categories');
     Route::post('categories' , 'CategoryController@store')->name('save-category');
     Route::get( 'categories/{id}' , 'CategoryController@show');
     Route::delete('categories/{id}', 'CategoryController@destroy')->name('delete_category');
 
+    //comments
     Route::get('comments' , 'CommentController@index')->name('comments');
     Route::get('comments/{id}' , 'CommentController@show');
 
+    //bids
+    //Route::get('bids' , 'BidController@index')->name('bids');
+    //Route::get('place-bids' , 'BidController@create')->name('place-bids');
+    Route::post('bids/{post_id}', 'BidController@store')->name('bids.store');
+
+    //Route::delete('bibs/{id}', 'CategoryController@destroy')->name('delete_category');
+
     Route::get('user' , 'UserController@index')->name('users');
 
-} );
+});
+
+
 Route::resource('posts', 'PostController');
 
 Route::get('users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
@@ -56,7 +67,8 @@ Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/kalimati-price', 'KalimatiPriceController@index')->name('dailyPrice');
-Route::any('search', 'SearchController@search')->name('search');
+Route::any('/search', 'SearchController@search')->name('search');
+Route::any('/advance-search-results', 'SearchController@advanceSearch')->name('advance-search');
 
 
 

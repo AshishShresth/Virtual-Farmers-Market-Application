@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-5">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light px-lg-5">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('storage/post_images/logo/logo.png') }}" alt="VFM Logo" class="brand-image"
