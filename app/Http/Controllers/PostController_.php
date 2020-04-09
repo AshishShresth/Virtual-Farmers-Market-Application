@@ -7,49 +7,88 @@ use App\Image;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    //public function __construct()
-    //{
-        //$this->middleware('auth', ['except' => ['index', 'show']]);
-    //}
-
-    public function index(){
+    public function __construct()
+    {
+        $this->middleware('auth',['except' => ['index', 'show']]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        return view('posts.posts')->withPosts($posts);
+        $categories = Category::all();
+        //return view('posts.index')->withPosts($posts);
+        return view('posts.index')->with(
+            [
+                'posts' => $posts,
+                'categories' => $categories,
+            ]
+        );
     }
 
-    public function show($id){
-        $post = Post::find($id);
-        $images = $post->images;
-
-        return view('posts.post')->with([
-            'post' => $post,
-            'images' => $images
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $categories = Category::all();
+        return view('posts.create')->with([
+            'categories' => $categories,
         ]);
     }
 
-    public function store(Request $request){
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $request->validate(
             [
-            'product_name' => 'required',
-            'quantity' => 'required',
-            'price_per_kg' => 'required',
-            'date_of_harvest' => 'required',
-            'post_category' => 'required',
-            'current_address' => 'required',
-            'product_description' => 'required',
-            'district' => 'required',
-                'post_images' => 'required',
+                'product_name' => 'required',
+                'quantity' => 'required',
+                'price_per_kg' => 'required',
+                'date_of_harvest' => 'required',
+                'post_category' => 'required',
+                'current_address' => 'required',
+                'product_description' => 'required',
+                'district' => 'required',
+                'cover_image' => 'image|nullable|max:1999',
+                'post_images' => 'nullable',
                 'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+            ]);
 
         //dd( $request);
 
         $user = Auth::user();
 
+
+
+        //handle file upload
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('cover_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
         $post = new Post();
         $post->product_name = $request->input('product_name');
         $post->quantity = $request->input('quantity');
@@ -60,44 +99,60 @@ class PostController extends Controller
         $post->district = $request->input('district');
         $post->product_description = $request->input('product_description');
         $post->user_id = $user->id;
+        $post->cover_image = $fileNameToStore;
         $post->save();
 
 
-        if ($request->hasFile('post_images')){
-            $images = $request->file('post_images');
-            foreach ($images as $image){
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/post_images', $fileNameToStore);
-                $image = new Image();
-                $image->image_url = $fileNameToStore;
-                $image->post_id = $post->id;
-                $image->save();
-            }
-        }
-
-        return redirect()->route('posts')->with('success', 'Post created');
+        return redirect('/posts')->with('success', 'Post created');
     }
 
-    public function newPost(){
-        $categories = Category::all();
-        return view('posts.new-post')->with([
-            'categories' => $categories,
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $post = Post::find($id);
+        $images = $post->images;
+
+        return view('posts.show')->with([
+            'post' => $post,
+            'images' => $images
         ]);
     }
 
-    public function edit($id){
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
         $post = Post::find($id);
+        $categories = Category::all();
         //check for correct user
-        if (auth()->user()->id !==$post->user-id){
+        if (auth()->user()->id !==$post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized page');
         }
-        return view('posts.edit')->with('post', $post);
+        return view('posts.edit')->with(
+            [
+                'post' => $post,
+                'categories' => $categories,
+            ]);
     }
 
-    public function update(Request $request, $id){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
         $request->validate(
             [
                 'product_name' => 'required',
@@ -144,27 +199,31 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->route('posts')->with('success', 'Post updated');
+        return redirect('/posts')->with('success', 'Post updated');
     }
 
-    public function destroy($id){
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
         $post = Post::find($id);
         //Check if the post exists before deleting
         if (!isset($post)){
-            return redirect()->route('posts')->with('error', 'No post found');
-            //return redirect('/posts')->with('error', 'No post found');
+            //return redirect()->route('posts')->with('error', 'No post found');
+            return redirect('/posts')->with('error', 'No post found');
         }
 
         //check for correct user
         if (auth()->user()->id !==$post->user_id){
-            return redirect()->route('posts')->with('error', 'Unauthorized page');
-            //return redirect('/posts')->with('error', 'Unauthorized page');
+            //return redirect()->route('posts')->with('error', 'Unauthorized page');
+            return redirect('/posts')->with('error', 'Unauthorized page');
         }
 
         $post->delete();
-        return redirect()->route('posts')->with('success', 'Post Deleted');
+        return redirect('/posts')->with('success', 'Post Deleted');
     }
-
-
-
 }
