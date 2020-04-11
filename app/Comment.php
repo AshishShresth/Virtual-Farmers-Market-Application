@@ -18,4 +18,8 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public function bid(){
+        return $this->belongsTo(Bid::class);
+    }
+
 }

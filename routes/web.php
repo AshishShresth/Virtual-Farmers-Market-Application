@@ -32,7 +32,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('comments/{id}' , 'CommentController@show');
 
     //bids
-    //Route::get('bids' , 'BidController@index')->name('bids');
+    Route::get('bids' , 'BidController@index')->name('bids');
+    Route::get('/posts/{post_id}/bids/{bid_id}' , 'BidController@show')->name('bids.show');
     //Route::get('place-bids' , 'BidController@create')->name('place-bids');
     Route::post('bids/{post_id}', 'BidController@store')->name('bids.store');
 

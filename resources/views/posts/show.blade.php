@@ -76,6 +76,53 @@
                 <p>Phone Number: {{$post->user->phone_number}}</p>
             </div>
         </div>
+        @if($post->bids()->count()>0)
+            @if(!Auth::guest())
+                @if(Auth::user()->id == $post->user_id)
+                    <div class="card card-blue">
+                        <div class="card-header">
+                            <h3>Bids <small>{{ $post->bids()->count() }} total</small></h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Product Quantity</th>
+                                    <th>Bidding Price</th>
+                                    <th>Message</th>
+                                    <th>Bidders</th>
+                                    <th>Phone Number</th>
+                                    <th>Action</th>
+
+                                    <th width="70px"></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach ($post->bids as $bid)
+                                    <tr>
+                                        <td>{{ $bid->product_quantity }}</td>
+                                        <td>{{ $bid->bidding_price }}</td>
+                                        <td>{{ $bid->message }}</td>
+                                        <td>{{ $bid->bidder_name }}</td>
+                                        <td>{{ $bid->bidder_phone }}</td>
+                                        <td>
+                                            <a href="/posts/{{$post->id}}/bids/{{$bid->id}}" class="btn btn-xs btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
+            @endif
+        @else
+            <div class="container">
+                <p class="text-danger">No bids have been placed</p>
+            </div>
+
+        @endif
     </div>
     <!--
     <div class="row mt-4">

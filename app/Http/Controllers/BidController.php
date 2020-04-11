@@ -21,7 +21,8 @@ class BidController extends Controller
      */
     public function index()
     {
-        //
+        $bids = Bid::with(['user', 'post'])->get();
+        return view( 'bids.bids')->withbids( $bids);
     }
 
     /**
@@ -50,12 +51,17 @@ class BidController extends Controller
 
         $post = Post::find($post_id);
         $user = Auth::user();
+        $firstName = $user->first_name;
+        $lastName = $user->last_name;
+        $name = $firstName." ".$lastName;
 
         $bid = new Bid();
         $bid->product_quantity = $request->input('product_quantity');
         $bid->bidding_price = $request->input('bidding_price');
         $bid->message = $request->input('message');
         $bid->user_id = $user->id;
+        $bid->bidder_name = $name;
+        $bid->bidder_phone = $user->phone_number;
         //$bid->post()->associate($post); //here is the error
         $bid->post_id = $post->id;
 
@@ -70,9 +76,10 @@ class BidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show($bid_id)
     {
-        //
+        return view('bids.singleBid')->withBids( Bid::find($bid_id));
     }
 
     /**
@@ -104,8 +111,9 @@ class BidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         //
     }
+
 }

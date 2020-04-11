@@ -18,4 +18,8 @@ class Bid extends Model
     public  function post(){
         return $this->belongsTo(Post::class);
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }
