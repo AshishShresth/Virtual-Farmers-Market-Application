@@ -107,7 +107,7 @@
                                         <td>{{ $bid->bidder_name }}</td>
                                         <td>{{ $bid->bidder_phone }}</td>
                                         <td>
-                                            <a href="/posts/{{$post->id}}/bids/{{$bid->id}}" class="btn btn-xs btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="/bids/{{$bid->id}}" class="btn btn-xs btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -124,6 +124,7 @@
 
         @endif
     </div>
+
     <!--
     <div class="row mt-4">
         <div class="col-md-4">

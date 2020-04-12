@@ -41,7 +41,7 @@ class BidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $post_id)
+    public function store(Request $request, $post)
     {
         $this->validate($request, array(
             'product_quantity' => 'required',
@@ -49,7 +49,7 @@ class BidController extends Controller
             'message' => 'required|max:500',
         ));
 
-        $post = Post::find($post_id);
+        $post = Post::find($post);
         $user = Auth::user();
         $firstName = $user->first_name;
         $lastName = $user->last_name;
@@ -77,9 +77,9 @@ class BidController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show($bid_id)
+    public function show($bid)
     {
-        return view('bids.singleBid')->withBids( Bid::find($bid_id));
+        return view('bids.singleBid')->withBids( Bid::find($bid));
     }
 
     /**

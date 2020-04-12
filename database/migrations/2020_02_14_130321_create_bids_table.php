@@ -17,6 +17,8 @@ class CreateBidsTable extends Migration
             $table->bigIncrements('id');
             $table->decimal('product_quantity');
             $table->decimal('bidding_price');
+            $table->text('bidder_name');
+            $table->text('bidder_phone');
             $table->string('message');
             $table->bigInteger('user_id');
             $table->bigInteger('post_id');
