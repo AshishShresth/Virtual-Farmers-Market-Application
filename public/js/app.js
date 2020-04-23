@@ -58891,7 +58891,7 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "9cc5ee7640ce1289806b",
+  key: '9cc5ee7640ce1289806b',
   cluster: "ap2",
   encrypted: true
 });

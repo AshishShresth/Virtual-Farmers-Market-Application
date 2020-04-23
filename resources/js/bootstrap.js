@@ -37,7 +37,7 @@ window.Vue = require('vue');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
+    key:'9cc5ee7640ce1289806b',
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: true
 });

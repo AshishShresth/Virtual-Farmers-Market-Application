@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Bid;
+use App\Notifications\BidForPost;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use mysql_xdevapi\Session;
@@ -21,8 +23,9 @@ class BidController extends Controller
      */
     public function index()
     {
-        $bids = Bid::with(['user', 'post'])->get();
-        return view( 'bids.bids')->withbids( $bids);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('profile.my-bids')->with('bids', $user->bids);
     }
 
     /**
@@ -64,9 +67,14 @@ class BidController extends Controller
         $bid->bidder_phone = $user->phone_number;
         //$bid->post()->associate($post); //here is the error
         $bid->post_id = $post->id;
+        $bid->product_name = $post->product_name;
+
 
         $bid->save();
-        return redirect()->back()->with('message', 'Bid Placed');
+
+        $post->user->notify(new BidForPost($post));
+
+        return redirect()->back()->with('success', 'Bid Placed');
 
     }
 

@@ -57,6 +57,7 @@
             },
             mounted() {
                 this.getComments();
+                this.listen();
             },
             methods: {
                 getComments() {
@@ -79,8 +80,14 @@
                         })
                         .catch((error) => {
                             console.log(error);
-                        })
+                        });
                 },
+                listen() {
+                    Echo.private('bid.'+this.bid.id)
+                        .listen('NewComment', (comment) => {
+                            this.comments.unshift(comment);
+                        })
+                }
             }
         });
     </script>

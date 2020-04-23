@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $category->title = $request->get('category_title');
         $category->parent_id = $request->get('parent_id');
         $category->save();
-        return redirect()->back()->with('message', 'New Category Created');
+        return redirect()->back()->with('success', 'New Category Created');
     }
 
     public function destroy($id)

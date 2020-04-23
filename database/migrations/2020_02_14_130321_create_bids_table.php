@@ -22,6 +22,7 @@ class CreateBidsTable extends Migration
             $table->string('message');
             $table->bigInteger('user_id');
             $table->bigInteger('post_id');
+            $table->string('product_name');
             $table->timestamps();
         });
     }

@@ -103,7 +103,7 @@ class PostController extends Controller
         $post->save();
 
 
-        return redirect('/posts')->with('success', 'Post created');
+        return redirect('/dashboard')->with('success', 'Your post has been successfully posted');
     }
 
     /**
@@ -167,7 +167,7 @@ class PostController extends Controller
                 'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-        //dd( $request);
+        dd( $request);
 
         $user = Auth::user();
 
@@ -199,7 +199,7 @@ class PostController extends Controller
             }
         }
 
-        return redirect('/posts')->with('success', 'Post updated');
+        return redirect('/dashboard')->with('success', 'Post updated');
     }
 
     /**
@@ -224,6 +224,6 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted');
+        return redirect('/dashboard')->with('success', 'Post Deleted');
     }
 }

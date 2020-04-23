@@ -1,5 +1,7 @@
 @extends ( 'layouts.app' )
 
+@section('title', "VFM.com - Nepal's Online farmers Market")
+
 @section( 'content' )
     <div class="container gedf-wrapper">
         <div class="row">

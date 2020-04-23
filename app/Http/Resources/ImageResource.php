@@ -20,7 +20,6 @@ class ImageResource extends JsonResource
             'post_id' => $this->post_id,
             //'created_at' => $this->created_at,
             //'updated_at' => $this->updated_at
-
         ];
     }
 }

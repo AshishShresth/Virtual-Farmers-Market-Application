@@ -224,6 +224,6 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted');
+        return redirect('/dashboard')->with('success', 'Post Deleted');
     }
 }
