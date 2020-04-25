@@ -119,7 +119,7 @@
                     <div class="card gedf-card">
                         <div class="card-horizontal">
                             <div class="img-square-wrapper">
-                                <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
+                                <img style="width: 100%" src="/storage/post_images/{{$post->images->first()->image_url}}">
                             </div>
                             <div class="card-body">
                                 <h3><a class="card-link" href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>

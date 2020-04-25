@@ -19,9 +19,9 @@
                         <p>Category: {{$post->category->title}}</p>
                         <p>This post was created at: {{$post->created_at}}</p>
                     </div>
-                    <div class="col-md-6">
-                        <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
-                    </div>
+                    @foreach($images as $image)
+                        <img style="width: 100%" src="/storage/post_images/{{$image->image_url}}">
+                    @endforeach
                 </div>
             </div>
             @if(!Auth::guest())

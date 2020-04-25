@@ -115,21 +115,19 @@
                         Udayapur </option> </select>
 
             </div>
-            <!--
-                <div class="form-group">
-                    <label for="post_images">Product images</label>
-                    <input id="post_images" name="post_images[]" type="file" multiple>
-                </div>
-            -->
             <div class="form-group">
                 <label for="quantity">Product Description</label>
                 <textarea class="form-control" name="product_description" cols="20" rows="10" placeholder="Body Text"></textarea>
             </div>
             <div class="form-group">
-                <label for="cover-image">Cover Image</label>
-                <input type="file" name="cover_image">
-                <h6 class="font-weight-light font-italic">Choose a single image, more images can be added after the ad has been successfully posted on the website</h6>
+                <label for="post_images">Product images</label>
+                <input id="post_images" name="post_images[]" type="file" multiple>
             </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="cover-image">Cover Image</label>--}}
+{{--                <input type="file" name="cover_image">--}}
+{{--                <h6 class="font-weight-light font-italic">Choose a single image, more images can be added after the ad has been successfully posted on the website</h6>--}}
+{{--            </div>--}}
             <div class="row">
                 <div class="d-flex justify-content-start col-md-6">
                     <button type="submit" class="btn btn-primary">Submit</button>

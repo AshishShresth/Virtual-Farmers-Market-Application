@@ -1,0 +1,138 @@
+[33mcommit 63de2f1e7bd056e7392cb1d640931522d5e12db7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Apr 25 23:28:49 2020 +0545
+
+    ok
+
+[33mcommit 2a1c9e48bdaf144b45aaa8e1c131504bb7497dad[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: 10885ef c2a8c1b
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Apr 25 22:42:17 2020 +0545
+
+    ok
+
+[33mcommit 10885efd5ff71750b6e7d7add8c98b4e6dbe13f2[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Apr 25 22:40:00 2020 +0545
+
+    workspaceChange
+
+[33mcommit c2a8c1ba9a0f0c2f9699402768d24e4b342299f4[m[33m ([m[1;32mwebsockets[m[33m)[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Apr 25 22:36:39 2020 +0545
+
+    NotificationComplete
+
+[33mcommit 02dfa9b11e1ca8515dbeccadd6587ec7b0032f97[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Thu Apr 23 22:40:01 2020 +0545
+
+    chatCompleted
+
+[33mcommit 5c17277530b42c735197fe7178b390a3044a51fa[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Thu Apr 23 22:39:15 2020 +0545
+
+    real time chat with laravel echo and pusher complete
+
+[33mcommit 41ab70037160934cc398b3f866d12cc21468b5ad[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sun Apr 12 07:17:01 2020 +0545
+
+    messenging fixed
+
+[33mcommit a167808354ef140b3d4d9e61325baa9b64ab0b3c[m[33m ([m[1;31morigin/websockets[m[33m)[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sun Apr 12 01:54:17 2020 +0545
+
+    started-websocktes
+
+[33mcommit 723f630ffe63afdd4b9442ffba61fac7cb2de3ec[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sun Apr 12 01:29:37 2020 +0545
+
+    completed-bids
+
+[33mcommit 9f36c687e4048845f74b033690a151ab331916da[m[33m ([m[1;31morigin/bids[m[33m)[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sun Apr 12 01:20:40 2020 +0545
+
+    bids-branch
+
+[33mcommit ee85b96c16e1e79f46a65162212febf2eeb08b32[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Thu Apr 9 21:18:20 2020 +0545
+
+    Fixed-PostController
+
+[33mcommit 6f4b7c396abf4792673f8ec71439a47b249efcc6[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Thu Apr 9 12:04:27 2020 +0545
+
+    added controllers
+
+[33mcommit 1478034af7c025127e45155cfbe52ddc671b0656[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Apr 4 22:56:41 2020 +0545
+
+    bidding
+
+[33mcommit 7fb0d63bda333328500c8364558c61dce77c47d5[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Mon Mar 23 18:52:07 2020 +0545
+
+    design tweaks
+
+[33mcommit 1aa792718f87a883692824a70d26fbb46afc5e65[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Sat Mar 21 21:59:22 2020 +0545
+
+    layout design
+
+[33mcommit a0c701c7b2166f5028de12941150e061b119b6d2[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Mon Mar 16 21:15:49 2020 +0545
+
+    navbar design
+
+[33mcommit 9ba3b34dbb0fed27e7ee3655abe92540f8067db5[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Wed Mar 4 18:02:08 2020 +0545
+
+    login for different user(admin and user) created
+
+[33mcommit 75ac6387c28010367d6ca6720d034634e866cc99[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Wed Mar 4 00:54:13 2020 +0545
+
+    created admin guard
+
+[33mcommit 9f55e2baf3f5b97991cd31aaf58d10559743d55e[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Tue Mar 3 23:48:04 2020 +0545
+
+    fixed edit function
+
+[33mcommit 8665af69f617a8c0de2505ef2056f142c2bad999[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Thu Feb 27 18:23:06 2020 +0545
+
+    creating Rest Api
+
+[33mcommit a1fecf20ffb0e1e9c06956b187b8aed64bb24237[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Tue Feb 18 22:27:01 2020 +0545
+
+    creating controllers completed
+
+[33mcommit cb72434037608b0155b5da8db1c8d202aced49d5[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Mon Feb 17 14:36:47 2020 +0545
+
+    all files commit
+
+[33mcommit c6fc514ab96d71ae09e1fe6d56836ef4ff0179e7[m
+Author: AshishShresth <np01cp4a170120@islingtoncollege.edu.np>
+Date:   Mon Feb 17 14:29:56 2020 +0545
+
+    first commit
