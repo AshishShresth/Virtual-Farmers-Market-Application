@@ -91,7 +91,7 @@ class PostController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $image->getClientOriginalExtension();
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/post_images', $fileNameToStore);
+                $path = $image->storeAs('post_images', $fileNameToStore);
                 $image = new Image();
                 $image->image_url = $fileNameToStore;
                 $image->post_id = $post->id;
