@@ -31,7 +31,7 @@ class PostResource extends JsonResource
             'user' => new UserResource( $this->user ),
             'category' => new CategoryResource( $this->category ),
             'images' => ImageResource::collection( $this->images ),
-            'comments' => CommentResource::collection( $this->comments ),
+            //'comments' => CommentResource::collection( $this->comments ),
             'bids' => BidResource::collection( $this->bids),
 
 

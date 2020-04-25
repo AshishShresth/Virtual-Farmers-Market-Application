@@ -1,5 +1,7 @@
 @extends ( 'layouts.app' )
 
+@section('title', e($post->product_name))
+
 @section( 'content' )
     <div class="col-md-12 mt-5 mb-5">
         <div class="card">
@@ -22,49 +24,59 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BidModal">
-                    Place A Bid
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="BidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Bid Price To Buy</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+            @if(!Auth::guest())
+                @if(Auth::user()->id != $post->user_id)
+                    <div class="card-footer">
+                        <!-- Button trigger modal -->
+                        @if(! App\Bid::where('post_id', $post->id)->where('user_id', Auth::user()->id)->exists())
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BidModal">
+                                    Place A Bid
                                 </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container h-100" style="max-width: 800px;">
-                                    <h2>Place A Bid</h2>
-                                    <form method="post" action="{{ route('bids.store', [$post->id]) }}" >
-                                        @csrf
-                                        <div class="row align-items-center h-100">
-                                            <div class="form-group col-md-6">
-                                                <label for="productQuantity">Product Quantity:</label>
-                                                <input type="number" class="form-control" name="product_quantity" id="product_quantity">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="biddingPrice">Bidding Price Per KG:</label>
-                                                <input type="number" class="form-control" name="bidding_price" id="bidding_price">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="message">Message:</label>
-                                                <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Place your query..."></textarea>
-                                            </div>
+                            @else
+                                <h6 class="text text-info">You have already placed a bid for this post</h6>
+                        @endif
+                        <!-- Modal -->
+                        <div class="modal fade" id="BidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Bid Price To Buy</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container h-100" style="max-width: 800px;">
+                                            <h2>Place A Bid</h2>
+
+                                            <form method="post" action="{{ route('bids.store', [$post->id]) }}" >
+                                                @csrf
+                                                <div class="row align-items-center h-100">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="productQuantity">Product Quantity:</label>
+                                                        <input type="number" class="form-control" name="product_quantity" id="product_quantity">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="biddingPrice">Bidding Price Per KG:</label>
+                                                        <input type="number" class="form-control" name="bidding_price" id="bidding_price">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="message">Message:</label>
+                                                        <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Place your query..."></textarea>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Place bid</button>
+                                            </form>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Place bid</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- end of modal -->
                     </div>
-                </div>
-            </div>
+                @endif
+            @endif
+
         </div>
         <div class="card">
             <div class="card-header">
@@ -107,7 +119,7 @@
                                         <td>{{ $bid->bidder_name }}</td>
                                         <td>{{ $bid->bidder_phone }}</td>
                                         <td>
-                                            <a href="/posts/{{$post->id}}/bids/{{$bid->id}}" class="btn btn-xs btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="/bids/{{$bid->id}}" class="btn btn-xs btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -121,9 +133,9 @@
             <div class="container">
                 <p class="text-danger">No bids have been placed</p>
             </div>
-
         @endif
     </div>
+
     <!--
     <div class="row mt-4">
         <div class="col-md-4">

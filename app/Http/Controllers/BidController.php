@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Bid;
+use App\Notifications\BidForPost;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use mysql_xdevapi\Session;
@@ -21,8 +23,9 @@ class BidController extends Controller
      */
     public function index()
     {
-        $bids = Bid::with(['user', 'post'])->get();
-        return view( 'bids.bids')->withbids( $bids);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('profile.my-bids')->with('bids', $user->bids);
     }
 
     /**
@@ -41,7 +44,7 @@ class BidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $post_id)
+    public function store(Request $request, $post)
     {
         $this->validate($request, array(
             'product_quantity' => 'required',
@@ -49,7 +52,7 @@ class BidController extends Controller
             'message' => 'required|max:500',
         ));
 
-        $post = Post::find($post_id);
+        $post = Post::find($post);
         $user = Auth::user();
         $firstName = $user->first_name;
         $lastName = $user->last_name;
@@ -64,9 +67,14 @@ class BidController extends Controller
         $bid->bidder_phone = $user->phone_number;
         //$bid->post()->associate($post); //here is the error
         $bid->post_id = $post->id;
+        $bid->product_name = $post->product_name;
+
 
         $bid->save();
-        return redirect()->back()->with('message', 'Bid Placed');
+
+        $post->user->notify(new BidForPost($post));
+
+        return redirect()->back()->with('success', 'Bid Placed');
 
     }
 
@@ -77,9 +85,9 @@ class BidController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show($bid_id)
+    public function show($bid)
     {
-        return view('bids.singleBid')->withBids( Bid::find($bid_id));
+        return view('bids.singleBid')->withBids( Bid::find($bid));
     }
 
     /**

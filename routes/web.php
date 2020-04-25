@@ -33,13 +33,22 @@ Route::middleware(['auth'])->group(function(){
 
     //bids
     Route::get('bids' , 'BidController@index')->name('bids');
-    Route::get('/posts/{post_id}/bids/{bid_id}' , 'BidController@show')->name('bids.show');
+    Route::get('bids/{bid}' , 'BidController@show')->name('bids.show');
     //Route::get('place-bids' , 'BidController@create')->name('place-bids');
     Route::post('bids/{post_id}', 'BidController@store')->name('bids.store');
 
     //Route::delete('bibs/{id}', 'CategoryController@destroy')->name('delete_category');
 
     Route::get('user' , 'UserController@index')->name('users');
+
+    //dashboard
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/my-bids', 'BidController@index')->name('my-bids');
+
+    //notifications
+    Route::get('/markAsRead', function (){
+        auth()->user()->unreadNotifications->markAsRead();
+    });
 
 });
 
@@ -65,7 +74,7 @@ Route::prefix('admin')->group(function (){
 
 
 Auth::routes(['verify' => true]);
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/kalimati-price', 'KalimatiPriceController@index')->name('dailyPrice');
 Route::any('/search', 'SearchController@search')->name('search');

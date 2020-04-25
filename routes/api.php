@@ -29,8 +29,9 @@ Route::get('comments', 'Api\CommentApiController@index');
 Route::get('reports', 'Api\ReportApiController@index');
 
 
+Route::get('bids/{bid}/comments', 'CommentController@index');
+Route::middleware('auth:api')->group(function () {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('bids/{bid}/comment', 'CommentController@store');
 });
 

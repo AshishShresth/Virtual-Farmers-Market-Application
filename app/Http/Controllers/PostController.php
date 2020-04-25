@@ -103,7 +103,7 @@ class PostController extends Controller
         $post->save();
 
 
-        return redirect('/posts')->with('success', 'Post created');
+        return redirect('/dashboard')->with('success', 'Your post has been successfully posted');
     }
 
     /**
@@ -163,7 +163,8 @@ class PostController extends Controller
                 'current_address' => 'required',
                 'product_description' => 'required',
                 'district' => 'required',
-                'post_images' => 'required',
+                'cover_image' => 'image|nullable|max:1999',
+                'post_images' => 'nullable',
                 'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
@@ -171,7 +172,24 @@ class PostController extends Controller
 
         $user = Auth::user();
 
-        $post = new Post();
+
+
+        //handle file upload
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('cover_images', $fileNameToStore);
+        }
+
+        //update post
+        $post = Post::find($id);
         $post->product_name = $request->input('product_name');
         $post->quantity = $request->input('quantity');
         $post->price_per_kg = $request->input('price_per_kg');
@@ -180,26 +198,14 @@ class PostController extends Controller
         $post->current_address = $request->input('current_address');
         $post->district = $request->input('district');
         $post->product_description = $request->input('product_description');
-        $post->user_id = $user->id;
+        if($request->hasFile('cover_image')){
+            $post->cover_image = $fileNameToStore;
+        }
+
         $post->save();
 
 
-        if ($request->hasFile('post_images')){
-            $images = $request->file('post_images');
-            foreach ($images as $image){
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/post_images', $fileNameToStore);
-                $image = new Image();
-                $image->image_url = $fileNameToStore;
-                $image->post_id = $post->id;
-                $image->save();
-            }
-        }
-
-        return redirect('/posts')->with('success', 'Post updated');
+        return redirect('/dashboard')->with('success', 'Your post has been successfully updated');
     }
 
     /**
@@ -224,6 +230,6 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted');
+        return redirect('/dashboard')->with('success', 'Post Deleted');
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class PostApiController extends Controller
 {
    public function index(){
-       $posts = Post::with(['user', 'category', 'images', 'comments', 'bids'])->paginate(); //eager loading the with refers to the relationship defined in the post model
+       $posts = Post::with(['user', 'category', 'images',  'bids'])->paginate(); //eager loading the with refers to the relationship defined in the post model
        // Return collection of posts as a resource
        //return new PostsResource( $posts );
        return PostResource::collection( $posts );
