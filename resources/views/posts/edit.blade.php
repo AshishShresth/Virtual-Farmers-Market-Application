@@ -18,12 +18,12 @@
         </div>
         <div class="form-group">
             <label for="date_of_harvest">Date of harvest</label>
-            <input type="datetime-local" class="form-group" value="{{$post->date_of_harvest}}" name="date_of_harvest" id="date_of_harvest"/>
+            <input type="date" class="form-group" value="{{$post->date_of_harvest}}" name="date_of_harvest" id="date_of_harvest"/>
         </div>
         <div class="form-group">
             <label for="post_category">Post Category</label>
-            <select class="form-control"  value="{{$post->category->title}}" name="post_category" id="post_category">
-                <option value="0"  hidden="">Select category...</option>
+            <select class="form-control"  name="post_category" id="post_category">
+                <option value="0"  hidden="">{{$post->category->title}}</option>
                 @foreach( $categories as $category )
                     <option value="{{ $category->id }}" selected> {{ $category->title }}</option>
                 @endforeach
@@ -35,8 +35,8 @@
         </div>
         <div class="form-group">
             <label for="district">Districts</label>
-            <select name="district" id="district" class="form-control" value="{{$post->district}}">
-                <option value="0" hidden="">Select District...</option>
+            <select name="district" id="district" class="form-control" >
+                <option value="0" hidden="">{{$post->district}}</option>
                 <option value="achham">
                     Achham  </option><option value="arghakhanchi">
                     Arghakhanchi </option><option value="baglung">
@@ -116,16 +116,21 @@
 
         </div>
         <div class="form-group">
-            <label for="post_images">Product images</label>
-            <input id="post_images" name="post_images[]" type="file" multiple>
+            <label for="quantity">Product Description</label>
+            <textarea class="form-control" name="product_description" cols="20" rows="10" >{{$post->product_description}}</textarea>
         </div>
         <div class="form-group">
-            <label for="quantity">Product description</label>
-            <textarea class="form-control" value="{{$post->product_description}}" name="product_description" cols="20" rows="10" placeholder="Body Text"></textarea>
+            <label for="cover-image">Cover Image</label>
+            <input type="file" name="cover_image">
+            <h6 class="font-weight-light font-italic">Choose a single image, more images can be added after the ad has been successfully posted on the website</h6>
         </div>
-
-        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        <div class="row">
+            <div class="d-flex justify-content-start col-md-6">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            <div class="d-flex justify-content-end col-md-6">
+                <a class="btn btn-danger " href="/dashboard">Cancel</a>
+            </div>
+        </div>
     </form>
-
-
 @endsection

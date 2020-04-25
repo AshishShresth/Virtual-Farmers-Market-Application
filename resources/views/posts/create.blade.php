@@ -9,21 +9,21 @@
                 <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product name"/>
             </div>
             <div class="form-group">
-                <label for="quantity">Quantity in Kilogram</label>
+                <label for="quantity">Quantity In Kilogram</label>
                 <input type="number" class="form-group" name="quantity" id="quantity" />
             </div>
             <div class="form-group">
-                <label for="price_per_kg">Price per Kilogram</label>
+                <label for="price_per_kg">Price Per Kilogram</label>
                 <input type="number" class="form-group" name="price_per_kg" id="price_per_kg" />
             </div>
             <div class="form-group">
-                <label for="date_of_harvest">Date of harvest</label>
-                <input type="datetime-local" class="form-group" name="date_of_harvest" id="date_of_harvest"/>
+                <label for="date_of_harvest">Date Of Harvest</label>
+                <input type="date" class="form-group" name="date_of_harvest" id="date_of_harvest"/>
             </div>
             <div class="form-group">
                 <label for="post_category">Post Category</label>
                 <select class="form-control" name="post_category" id="post_category">
-                    <option value="0" hidden="">Select category...</option>
+                    <option value="0" hidden="">Select Category...</option>
                     @foreach( $categories as $category )
                         <option value="{{ $category->id }}"> {{ $category->title }}</option>
                     @endforeach
@@ -122,11 +122,13 @@
                 </div>
             -->
             <div class="form-group">
-                <label for="quantity">Product description</label>
+                <label for="quantity">Product Description</label>
                 <textarea class="form-control" name="product_description" cols="20" rows="10" placeholder="Body Text"></textarea>
             </div>
             <div class="form-group">
+                <label for="cover-image">Cover Image</label>
                 <input type="file" name="cover_image">
+                <h6 class="font-weight-light font-italic">Choose a single image, more images can be added after the ad has been successfully posted on the website</h6>
             </div>
             <div class="row">
                 <div class="d-flex justify-content-start col-md-6">

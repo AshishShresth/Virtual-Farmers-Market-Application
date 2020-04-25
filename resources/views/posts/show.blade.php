@@ -28,10 +28,13 @@
                 @if(Auth::user()->id != $post->user_id)
                     <div class="card-footer">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BidModal">
-                            Place A Bid
-                        </button>
-
+                        @if(! App\Bid::where('post_id', $post->id)->where('user_id', Auth::user()->id)->exists())
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BidModal">
+                                    Place A Bid
+                                </button>
+                            @else
+                                <h6 class="text text-info">You have already placed a bid for this post</h6>
+                        @endif
                         <!-- Modal -->
                         <div class="modal fade" id="BidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -69,6 +72,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- end of modal -->
                     </div>
                 @endif
             @endif
