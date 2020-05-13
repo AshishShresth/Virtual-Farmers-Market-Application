@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BidResource extends JsonResource
@@ -19,10 +20,10 @@ class BidResource extends JsonResource
             'bidding_quantity' => $this->product_quantity,
             'bidding_price' => $this->bidding_price,
             'message' => $this->message,
-            'bidder_id' => $this->user_id,
             'post_id' => $this->post_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at' => Carbon::parse($this->created_at)->format('d/m/Y'),
+            'updated_at' =>  Carbon::parse($this->updated_at)->format('d/m/Y'),
+            'bidder' => new UserResource( $this->user ),
         ];
     }
 }

@@ -51,7 +51,7 @@
                                         {{$post ->created_at->format('d.m.Y')}}</td>
 
                                     <td><a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
-                                        <a href="/posts/{{$post->id}}/add-image" class="btn btn-info">Add Images</a></td>
+                                        <a href="{{route('posts.image', $post->id)}}" class="btn btn-info">Add Images</a></td>
                                     <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-info">view</a></td>
                                     <td>
                                         <form action="{{ route('posts.destroy',$post->id) }}" method="POST">

@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -54,4 +56,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reports(){
         return $this->hasMany(Report::class, 'user_id', 'id');
     }
+
 }

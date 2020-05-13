@@ -3,11 +3,11 @@
 @section('title', "VFM.com - Nepal's Online farmers Market")
 
 @section( 'content' )
-    <div class="container gedf-wrapper">
+    <div class="container-fluid gedf-wrapper">
         <div class="row">
-            <div class="col-md-4 mb-5">
-                <div class="container border border-green">
-                    <h2>Advance search</h2>
+            <div class="col-md-3 mb-5">
+                <div class="container border bg-light p-4">
+                    <h3>Advance search</h3>
                     <form method="post" action="{{route('advance-search')}}">
                         @csrf
                         <div class="form-group row">
@@ -110,11 +110,14 @@
                                         Udayapur </option> </select>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit" ><i class="fa fa-search"></i>Search</button>
+                        <div>
+                            <button class="btn btn-primary" type="submit" ><i class="fa fa-search"></i>Search</button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="col-md-6 gedf-main">
+
+            <div class="col-md-8 gedf-main">
                 @foreach( $posts as $post)
                     <div class="card gedf-card">
                         <div class="card-horizontal">

@@ -16,9 +16,9 @@
                                 </div>
                             </div>
                             <div class="card-horizontal">
-                                <div class="img-square-wrapper">
-                                    <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
-                                </div>
+{{--                                <div class="img-square-wrapper">--}}
+{{--                                    <img style="width: 100%" src="/storage/post_images/{{$post->images->first()->image_url}}">--}}
+{{--                                </div>--}}
                                 <div class="card-body">
                                     <div class="card-text">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor

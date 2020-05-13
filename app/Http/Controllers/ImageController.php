@@ -17,11 +17,9 @@ class ImageController extends Controller
 
     }
 
-    public function store( Request $request){
+    public function store( Request $request, Post $id){
         $user = Auth::user();
-
-        $post = new Post();
-
+        $post = Post::find($id);
         $request->validate(
             [
                 'post_images' => 'nullable',

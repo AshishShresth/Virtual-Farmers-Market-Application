@@ -139,6 +139,44 @@ class PostController extends Controller
             ]);
     }
 
+    public function image($id){
+        $post = Post::find($id);
+        $images = $post->images;
+        //check for correct user
+        if (auth()->user()->id !==$post->user_id){
+            return redirect('/posts')->with('error', 'Unauthorized page');
+        }
+        return view('posts.image')->with(
+            [
+                'post' => $post,
+                'images' => $images
+            ]);
+    }
+
+    public function addImage( Request $request, $id){
+        $post = Post::find($id);
+        $request->validate(
+            [
+                'post_images' => 'nullable',
+                'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+        if ($request->hasFile('post_images')){
+            $images = $request->file('post_images');
+            foreach ($images as $image){
+                $filenameWithExt = $image->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $image->getClientOriginalExtension();
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                $path = $image->storeAs('post_images', $fileNameToStore);
+                $image = new Image();
+                $image->image_url = $fileNameToStore;
+                $image->post_id = $post->id;
+                $image->save();
+            }
+        }
+        return redirect('/dashboard')->with('success', 'Image uploaded successfully');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -158,8 +196,6 @@ class PostController extends Controller
                 'current_address' => 'required',
                 'product_description' => 'required',
                 'district' => 'required',
-                'post_images' => 'required',
-                'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
         //dd( $request);
@@ -179,20 +215,20 @@ class PostController extends Controller
         $post->save();
 
 
-        if ($request->hasFile('post_images')){
-            $images = $request->file('post_images');
-            foreach ($images as $image){
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('post_images', $fileNameToStore);
-                $image = new Image();
-                $image->image_url = $fileNameToStore;
-                $image->post_id = $post->id;
-                $image->save();
-            }
-        }
+//        if ($request->hasFile('post_images')){
+//            $images = $request->file('post_images');
+//            foreach ($images as $image){
+//                $filenameWithExt = $image->getClientOriginalName();
+//                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+//                $extension = $image->getClientOriginalExtension();
+//                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+//                $path = $image->storeAs('post_images', $fileNameToStore);
+//                $image = new Image();
+//                $image->image_url = $fileNameToStore;
+//                $image->post_id = $post->id;
+//                $image->save();
+//            }
+//        }
         return redirect('/dashboard')->with('success', 'Your post has been successfully updated');
     }
 

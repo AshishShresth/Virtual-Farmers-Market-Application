@@ -119,10 +119,10 @@
             <label for="quantity">Product Description</label>
             <textarea class="form-control" name="product_description" cols="20" rows="10" >{{$post->product_description}}</textarea>
         </div>
-        <div class="form-group">
-            <label for="post_images">Product images</label>
-            <input id="post_images" name="post_images[]" type="file" multiple>
-        </div>
+{{--        <div class="form-group">--}}
+{{--            <label for="post_images">Product images</label>--}}
+{{--            <input id="post_images" name="post_images[]" type="file" multiple>--}}
+{{--        </div>--}}
 
 {{--        <div class="form-group">--}}
 {{--            <label for="cover-image">Cover Image</label>--}}

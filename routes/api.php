@@ -16,6 +16,15 @@ Route::get('categories', 'Api\CategoryApiController@index');
 //this route will get all of the posts in a specific category
 Route::get('categories/{id}/posts', 'Api\CategoryApiController@posts');
 
+//routes for authentication
+Route::post('login', 'Api\UserController@login');
+Route::post('register', 'Api\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('details', 'Api\UserController@details');
+    Route::get('logout', 'Api\UserController@logout');
+});
+
 //route for getting the all the posts
 Route::get('posts', 'Api\PostApiController@index');
 

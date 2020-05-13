@@ -50,6 +50,10 @@ Route::middleware(['auth'])->group(function(){
         auth()->user()->unreadNotifications->markAsRead();
     });
 
+    //image
+    Route::get('/posts/{id}/image', 'PostController@image')->name('posts.image');
+    Route::post('/posts/{id}/image', 'PostController@addImage')->name('posts.addImage');
+
 });
 
 
