@@ -19961,7 +19961,7 @@ html.maximized-card {
 .register-page {
   -ms-flex-align: center;
   align-items: center;
-  background: #e9ecef;
+  /*background: #e9ecef;*/
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -19971,9 +19971,21 @@ html.maximized-card {
   justify-content: center;
 }
 
-.login-box,
+.attribution{
+    font-size: 10px;
+    color: grey;
+}
+
+.login-box{
+    width: 660px;
+}
+
 .register-box {
-  width: 360px;
+  width: 900px;
+}
+
+.welcome-box{
+    width: 350px;
 }
 
 @media (max-width: 576px) {

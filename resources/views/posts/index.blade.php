@@ -3,9 +3,9 @@
 @section('title', "VFM.com - Nepal's Online farmers Market")
 
 @section( 'content' )
-    <div class="container-fluid gedf-wrapper">
+    <div class="container gedf-wrapper">
         <div class="row">
-            <div class="col-md-3 mb-5">
+            <div class="col-md-4 mb-5">
                 <div class="container border bg-light p-4">
                     <h3>Advance search</h3>
                     <form method="post" action="{{route('advance-search')}}">
@@ -121,14 +121,20 @@
                 @foreach( $posts as $post)
                     <div class="card gedf-card">
                         <div class="card-horizontal">
-                            <div class="img-square-wrapper">
+                            <div class="img-square-wrapper p-4">
                                 <img style="width: 100%" src="/storage/post_images/{{$post->images->first()->image_url}}">
                             </div>
                             <div class="card-body">
                                 <h3><a class="card-link" href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>
-                                <div class="card-text">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                                <div class="row">
+                                    <div class="row justify-content-around">
+                                        <div class="col-4">
+                                            One of two columns
+                                        </div>
+                                        <div class="col-4">
+                                            One of two columns
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

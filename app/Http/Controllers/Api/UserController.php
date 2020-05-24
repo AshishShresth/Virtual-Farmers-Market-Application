@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\API;
 use Dotenv\Parser;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -18,10 +19,17 @@ class UserController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            return response()->json(['success' => $success], $this-> successStatus);
+            return response()->json([
+                'success' => true,
+                'token' => $success,
+                'user' => $user
+            ], $this-> successStatus);
         }
         else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Email or Password',
+            ], 401);
         }
     }
     /**
@@ -41,14 +49,20 @@ class UserController extends Controller
             'phone_number' => ['required', 'regex:/9([0-9]{9})/'],
         ]);
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors(),
+            ], 401);
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')-> accessToken;
-        $success['first_name'] =  $user->first_name;
-        return response()->json(['success'=>$success], $this-> successStatus);
+        $success['token'] = $user->createToken('appToken')->accessToken;
+        return response()->json([
+            'success' => true,
+            'token' => $success,
+            'user' => $user
+        ]);
     }
     /**
      * details api
@@ -63,10 +77,21 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+        if (Auth::user()){
+            $user = Auth::user()->token();
+            $user->revoke();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Logout Successful'
+            ]);
+
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Unable to Logout'
+            ]);
+        }
     }
 
 }
