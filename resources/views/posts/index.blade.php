@@ -121,7 +121,7 @@
                 @foreach( $posts as $post)
                     <div class="card gedf-card">
                         <div class="card-horizontal">
-                            <div class="img-square-wrapper p-4">
+                            <div class="img-square-wrapper p-4" style="width: 300px ; height: 300px;">
                                 <img style="width: 100%" src="/storage/post_images/{{$post->images->first()->image_url}}">
                             </div>
                             <div class="card-body">

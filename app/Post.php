@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class
+Post extends Model
 {
     protected $fillable = [
         'product_name', 'quantity', 'price_per_kg', 'date_of_harvest',
