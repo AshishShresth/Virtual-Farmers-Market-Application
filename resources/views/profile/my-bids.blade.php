@@ -35,17 +35,15 @@
                         <h4>You have <span class="text-primary">{{ $bids->count() }}</span> Bids</h4>
                     @endif
                 <hr size="30">
-                <div class="container bg-gradient-light">
-                    <table class="table">
-                        <thead>
+                <div class="container">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
                         <tr>
                             <th>Product Title</th>
                             <th>Product Quantity</th>
                             <th>Bidding Price</th>
                             <th>Message</th>
                             <th>Action</th>
-
-                            <th width="70px"></th>
                         </tr>
                         </thead>
 
@@ -57,7 +55,19 @@
                                 <td>{{ $bid->bidding_price }}</td>
                                 <td>{{ $bid->message }}</td>
                                 <td>
-                                    <a href="/bids/{{$bid->id}}" class="btn btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <a href="/bids/{{$bid->id}}" class="btn btn-sm btn-primary">Chat<span class="glyphicon glyphicon-pencil"></span></a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <form action="{{ route('delete_bid',$bid->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <!-- delete button -->
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

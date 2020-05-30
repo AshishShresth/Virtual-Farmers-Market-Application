@@ -20,7 +20,7 @@
                         <p>This post was created at: {{$post->created_at}}</p>
                     </div>
                     @foreach($images as $image)
-                        <img style="width: 100%" src="/storage/post_images/{{$image->image_url}}">
+                        <img style="width: 100%" src="/storage/{{$image->image_url}}">
                     @endforeach
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 @if(Auth::user()->id == $post->user_id)
                     <div class="card card-blue">
                         <div class="card-header">
-                            <h3>Bids <small>{{ $post->bids()->count() }} total</small></h3>
+                            <h3>You have<small>{{ $post->bids()->count() }} bids for this offer</small></h3>
                         </div>
                         <div class="card-body">
                             <table class="table">

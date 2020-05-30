@@ -119,9 +119,23 @@ class BidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $bid = Bid::find($id);
+        //Check if the bid exists before deleting
+        if (!isset($bid)){
+            //return redirect()->route('posts')->with('error', 'No post found');
+            return redirect('/my-bids')->with('error', 'No Bid found');
+        }
+
+        //check for correct user
+        if (auth()->user()->id !==$bid->user_id){
+            //return redirect()->route('posts')->with('error', 'Unauthorized page');
+            return redirect('/my-bids')->with('error', 'Unauthorized page');
+        }
+
+        $bid->delete();
+        return redirect('/dashboard')->with('success', 'Bid Deleted');
     }
 
 }

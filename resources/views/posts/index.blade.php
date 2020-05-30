@@ -6,8 +6,9 @@
     <div class="container gedf-wrapper">
         <div class="row">
             <div class="col-md-4 mb-5">
-                <div class="container border bg-light p-4">
+                <div class="container border bg-light p-3">
                     <h3>Advance search</h3>
+                    <hr>
                     <form method="post" action="{{route('advance-search')}}">
                         @csrf
                         <div class="form-group row">
@@ -121,8 +122,8 @@
                 @foreach( $posts as $post)
                     <div class="card gedf-card">
                         <div class="card-horizontal">
-                            <div class="img-square-wrapper p-4" style="width: 300px ; height: 300px;">
-                                <img style="width: 100%" src="/storage/post_images/{{$post->images->first()->image_url}}">
+                            <div class="img-square-wrapper p-2">
+                                <img style="width: 100%" src="/storage/{{$post->images->first()->image_url}}">
                             </div>
                             <div class="card-body">
                                 <h3><a class="card-link" href="/posts/{{$post->id}}">{{$post->product_name}}</a></h3>

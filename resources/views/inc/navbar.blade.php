@@ -8,22 +8,32 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fas fa-bars"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <div class="collapse order-3 navbar-collapse ml-auto" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav justify-content-center ml-auto">
-                <li class="{{ Request::is('posts') ? 'active' : '' }}">
+            <ul class="navbar-nav ml-auto">
+                <li class="{{ Request::is('posts') ? 'active' : '' }} nav-item">
                     <a class="nav-link" href="{{ route('posts.index') }}">Home</a>
                 </li>
-                <li class="{{ Request::is('kalimati-price') ? 'active' : '' }}">
+                <li class="{{ Request::is('kalimati-price') ? 'active' : '' }} nav-item">
                     <a class="nav-link" href="{{route('dailyPrice')}}">Kalimati Price</a>
                 </li>
             </ul>
             <!--Search bar-->
-            <form method="post" class="form-inline my-2 my-lg-0" action="{{route('search')}}">
-                @csrf
-                <input class="form-control mr-sm-2 " name="search" id="searchPost" type="search" placeholder="Search..." aria-label="Search" style="border-radius: 50px; width:250px !important;">
-                <button class="btn btn-primary my-2 my-sm-0" type="submit" style="border-radius: 25px;"><i class="fas fa-search"></i> Search</button>
+            <!-- SEARCH FORM -->
+            <form method="post" class="form-inline ml-0 ml-md-3" action="{{route('search')}}">
+                <div class="input-group input-group-sm">
+                    @csrf
+                    <input class="form-control form-control-navbar" name="search" id="searchPost" type="search" placeholder="Search..." aria-label="Search" style=" width:300px !important;">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar " type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
             </form>
+{{--            <form method="post" class="form-inline my-2 my-lg-0" action="{{route('search')}}">--}}
+{{--                @csrf--}}
+{{--                <input class="form-control mr-sm-2 " name="search" id="searchPost" type="search" placeholder="Search..." aria-label="Search" style=" width:250px !important;">--}}
+{{--                <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>--}}
+{{--            </form>--}}
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->

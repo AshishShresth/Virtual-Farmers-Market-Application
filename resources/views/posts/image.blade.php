@@ -45,13 +45,34 @@
                             </div>
                         </form>
                         <div class="container mt-5">
-                            <div class="row">
-                                @foreach($images as $image)
-                                    <div class="col-sm-6" style="max-width: 20%">
-                                        <img style="width: 100%" src="/storage/post_images/{{$image->image_url}}" class="img-thumbnail">
-                                        <button type="submit">Delete</button>
-                                    </div>
-                                @endforeach
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Images</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="w-50">
+                                            @foreach($images as $image)
+                                                <img style="width: 40%" src="/storage/{{$image->image_url}}" class="img-thumbnail">
+                                            @endforeach
+                                        </td>
+                                        <td>
+{{--                                            <form action="{{ route('posts.destroyImage',$image->id) }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('DELETE')--}}
+{{--                                            <!-- edit button -->--}}
+{{--                                            <!--<a href="{{route('posts.edit', $post->id)}}" class="btn btn-info">Edit</a> -->--}}
+{{--                                                <!-- delete button -->--}}
+{{--                                                <button type="submit" class="btn btn-danger mt-4">Delete</button>--}}
+{{--                                            </form>--}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

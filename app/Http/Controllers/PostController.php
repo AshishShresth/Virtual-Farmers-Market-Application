@@ -7,6 +7,8 @@ use App\Image;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Images;
 
 class PostController extends Controller
 {
@@ -66,6 +68,7 @@ class PostController extends Controller
                 'post_images' => 'required',
                 'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+
         //dd( $request);
 
         $user = Auth::user();
@@ -82,21 +85,43 @@ class PostController extends Controller
         $post->user_id = $user->id;
         $post->save();
 
+        $dt = now();
+        foreach ($request->file('post_images.*') as $key => $file) {
+            $extension = $file->extension();
 
-        if ($request->hasFile('post_images')){
-            $images = $request->file('post_images');
-            foreach ($images as $image){
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('post_images', $fileNameToStore);
-                $image = new Image();
-                $image->image_url = $fileNameToStore;
-                $image->post_id = $post->id;
-                $image->save();
-            }
+            $path = 'post_images/' . implode('.', [
+                    $dt->format('YmdHis'),
+                    $key,
+                    $extension
+                ]);
+
+            $image = Images::make($file);
+            $image->crop(140, 140, 25, 25);
+            //$image->fit(300, 60);
+
+            Storage::put($path, (string) $image->encode());
+
+            $photo = new Image();
+            $photo->image_url = $path;
+            $photo->post_id = $post->id;
+            $photo->save();
         }
+
+
+//        if ($request->hasFile('post_images')){
+//            $images = $request->file('post_images');
+//            foreach ($images as $image){
+//                $filenameWithExt = $image->getClientOriginalName();
+//                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+//                $extension = $image->getClientOriginalExtension();
+//                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+//                $path = $image->storeAs('post_images', $fileNameToStore);
+//                $image = new Image();
+//                $image->image_url = $fileNameToStore;
+//                $image->post_id = $post->id;
+//                $image->save();
+//            }
+//        }
         return redirect('/dashboard')->with('success', 'Your post has been successfully posted');
     }
 
@@ -159,20 +184,41 @@ class PostController extends Controller
                 'post_images' => 'nullable',
                 'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-        if ($request->hasFile('post_images')){
-            $images = $request->file('post_images');
-            foreach ($images as $image){
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('post_images', $fileNameToStore);
-                $image = new Image();
-                $image->image_url = $fileNameToStore;
-                $image->post_id = $post->id;
-                $image->save();
-            }
+        $dt = now();
+        foreach ($request->file('post_images.*') as $key => $file) {
+            $extension = $file->extension();
+
+            $path = 'post_images/' . implode('.', [
+                    $dt->format('YmdHis'),
+                    $key,
+                    $extension
+                ]);
+
+            $image = Images::make($file);
+            $image->crop(140, 140, 25, 25);
+            //$image->fit(300, 60);
+
+            Storage::put($path, (string) $image->encode());
+
+            $photo = new Image();
+            $photo->image_url = $path;
+            $photo->post_id = $post->id;
+            $photo->save();
         }
+//        if ($request->hasFile('post_images')){
+//            $images = $request->file('post_images');
+//            foreach ($images as $image){
+//                $filenameWithExt = $image->getClientOriginalName();
+//                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+//                $extension = $image->getClientOriginalExtension();
+//                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+//                $path = $image->storeAs('post_images', $fileNameToStore);
+//                $image = new Image();
+//                $image->image_url = $fileNameToStore;
+//                $image->post_id = $post->id;
+//                $image->save();
+//            }
+//        }
         return redirect('/dashboard')->with('success', 'Image uploaded successfully');
     }
 
@@ -255,4 +301,5 @@ class PostController extends Controller
         $post->delete();
         return redirect('/dashboard')->with('success', 'Post Deleted');
     }
+
 }

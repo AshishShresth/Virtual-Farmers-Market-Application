@@ -36,8 +36,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('bids/{bid}' , 'BidController@show')->name('bids.show');
     //Route::get('place-bids' , 'BidController@create')->name('place-bids');
     Route::post('bids/{post_id}', 'BidController@store')->name('bids.store');
-
-    //Route::delete('bibs/{id}', 'CategoryController@destroy')->name('delete_category');
+    Route::delete('bibs/{id}', 'BidController@destroy')->name('delete_bid');
 
     Route::get('user' , 'UserController@index')->name('users');
 
@@ -53,6 +52,7 @@ Route::middleware(['auth'])->group(function(){
     //image
     Route::get('/posts/{id}/image', 'PostController@image')->name('posts.image');
     Route::post('/posts/{id}/image', 'PostController@addImage')->name('posts.addImage');
+    //Route::delete('posts/{id}', 'PostController@destroyImage')->name('posts.destroyImage');
 
 });
 

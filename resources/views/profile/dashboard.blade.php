@@ -10,7 +10,7 @@
                 <hr>
                 <ul>
                     <li>
-                        <a href="/dashboard" class="btn btn-link text-dark"><span> Manage My Account</span></a>
+                        <a href="/dashboard" class="btn btn-link text-dark"><span>My Account</span></a>
                     </li>
                     <li>
                         <a href="/posts/create" class="btn btn-link text-dark"><span>Add Post </span></a>
@@ -36,36 +36,91 @@
                     @endif
                     <hr size="30">
                 @if(count($posts) > 0)
-                    <div class="container bg-gradient-light">
-                        <table class="table">
-                            <tr>
-                                <th>Title</th>
-                                <th>Edit</th>
-                                <th>View</th>
-                                <th>Delete</th>
-                            </tr>
-                            @foreach($posts as $post)
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
                                 <tr>
-                                    <td>{{$post->product_name}}
-                                        {{$post ->created_at->diffForHumans()}}
-                                        {{$post ->created_at->format('d.m.Y')}}</td>
-
-                                    <td><a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
-                                        <a href="{{route('posts.image', $post->id)}}" class="btn btn-info">Add Images</a></td>
-                                    <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-info">view</a></td>
-                                    <td>
-                                        <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <!-- edit button -->
-                                        <!--<a href="{{route('posts.edit', $post->id)}}" class="btn btn-info">Edit</a> -->
-                                            <!-- delete button -->
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Post Name</th>
+                                    <th scope="col">Bibbers</th>
+                                    <th scope="col">Add Image</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                        </table>
+                                </thead>
+                                <tbody>
+                                @foreach($posts as $post)
+                                    <tr>
+                                        <td class="w-25">
+                                            <img style="width: 80%;  padding-right: 5px" src="/storage/{{$post->images->first()->image_url}}">
+                                        </td>
+                                        <td>
+                                            <a href="{{route('posts.show', $post->id)}}" ><strong>{{$post->product_name}}</strong></a>
+                                            <br>
+                                            {{$post ->created_at->diffForHumans()}}
+                                            <br>
+                                            Date: {{$post ->created_at->format('d/m/Y')}}
+
+                                        </td>
+                                        <td>
+                                            <a href="{{route('posts.show', $post->id)}}" class="btn btn-sm btn-info"><strong>{{ $post->bids()->count() }}</strong>  Bids</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('posts.image', $post->id)}}" class="btn btn-sm btn-secondary">Add Images</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <!-- edit button -->
+                                                <a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-warning">Edit</a>
+                                                <!-- delete button -->
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+{{--                            <table class="table table-bordered table-striped">--}}
+{{--                                <thead class="thead-dark">--}}
+{{--                                    <tr>--}}
+{{--                                        <th>Title</th>--}}
+{{--                                        <th>Images</th>--}}
+{{--                                        <th>View</th>--}}
+{{--                                        <th>Bidders</th>--}}
+{{--                                        <th></th>--}}
+{{--                                    </tr>--}}
+{{--                                </thead>--}}
+{{--                                @foreach($posts as $post)--}}
+{{--                                    <tr>--}}
+{{--                                        <td class="w-25">--}}
+{{--                                            <img style="width: 30%;  padding-right: 5px" src="/storage/{{$post->images->first()->image_url}}">--}}
+{{--                                            <strong>{{$post->product_name}}</strong>--}}
+{{--                                            <br>--}}
+{{--                                            Date: {{$post ->created_at->format('d/m/Y')}}--}}
+{{--                                            {{$post ->created_at->diffForHumans()}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <a href="{{route('posts.image', $post->id)}}" class="btn btn-sm btn-secondary">Add Images</a>--}}
+{{--                                        </td>--}}
+{{--                                        <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-sm btn-info">View</a></td>--}}
+{{--                                        <td>--}}
+{{--                                            <a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>--}}
+{{--                                            <form action="{{ route('posts.destroy',$post->id) }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('DELETE')--}}
+{{--                                            <!-- edit button -->--}}
+{{--                                            <a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-warning">Edit</a>--}}
+{{--                                                <!-- delete button -->--}}
+{{--                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                            </table>--}}
+                        </div>
+
                     </div>
                 @else
                     <p>You have no posts</p>
